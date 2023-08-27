@@ -1,0 +1,192 @@
+<Window x:Class="MP3Player_WPF.Views.DialogWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:vm="clr-namespace:MP3Player_WPF.ViewModels"
+    Title="DialogWindow"
+    Height="200"
+    Width="150"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    DataContext="{Binding Source={x:Static vm:MainWindowViewModel.Instance}}">
+    <!-- ↑ .xamlにシングルトンのViewModelを設定する場合 -->
+
+    <Window.Resources>
+        <Style x:Key="DialogWindowButtonItems"
+            TargetType="{x:Type Button}">
+            <Setter Property="Background"
+                Value="Transparent"/>
+            <Setter Property="Foreground"
+                Value="Transparent"/>
+            <Setter Property="BorderBrush"
+                Value="Black"/>
+            <Setter Property="BorderThickness"
+                Value="0"/>
+            <Setter Property="Width"
+                Value="30"/>
+            <Setter Property="Height"
+                Value="30"/>
+            <Setter Property="Margin"
+                Value="10,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"/>
+
+                                <!-- 通常の画像 -->
+                                <Image x:Name="NormalImage"
+                                    Source="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                <!-- MouseOver 時の画像 (初めは非表示) -->
+                                <Image x:Name="MouseOverImage"
+                                    Source="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}"
+                                    Visibility="Collapsed"/>
+                            </Grid>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                Value="True">
+                                <Setter TargetName="NormalImage"
+                                    Property="Visibility"
+                                    Value="Collapsed"/>
+                                <Setter TargetName="MouseOverImage"
+                                    Property="Visibility"
+                                    Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                    Value="True">
+
+                    <!-- MouseOver 時の背景を変更しないようにする -->
+                    <Setter Property="Background"
+                        Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <!--// Background //-->
+        <Border Height="200"
+            Width="150"
+            CornerRadius="15,15,15,15"
+            Background="#232323" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                Orientation="Horizontal"
+                Height="30">
+
+                <Button Name="OpenFolderBtn"
+                    Style="{StaticResource DialogWindowButtonItems}"
+                    Margin="10,0,0,0"
+                    Content="../assets/folder_8c8c8c.png"
+                    Tag="../assets/folder.png"
+                    Command="{Binding OpenFolderCommand}" />
+
+
+                <TextBlock Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="#ffffff"
+                    Text="Open Folder">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenFolderCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1"
+                Orientation="Horizontal"
+                Height="30">
+
+                <Button Name="OpenFileBtn"
+                    Style="{StaticResource DialogWindowButtonItems}"
+                    Margin="10,0,0,0"
+                    Content="../assets/file_8c8c8c.png"
+                    Tag="../assets/file.png"
+                    Command="{Binding OpenFileCommand}" />
+
+                <TextBlock Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="#ffffff"
+                    Text="Open File">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenFileCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                Orientation="Horizontal"
+                Height="30">
+
+                <Button Style="{StaticResource DialogWindowButtonItems}"
+                    Margin="10,0,0,0"
+                    Content="../assets/chevron-left_8c8c8c.png"
+                    Tag="../assets/chevron-left.png">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+
+                            <!-- コードビハインドで、フォーカスを親ウィンドウに戻してから、このウィンドウを消します。 -->
+                            <ei:CallMethodAction MethodName="HideDialogWindowAndFocusParent"
+                                TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+
+                <TextBlock Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="15"
+                    Foreground="#ffffff"
+                    Text="Close">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+
+                            <!-- コードビハインドで、フォーカスを親ウィンドウに戻してから、このウィンドウを消します。 -->
+                            <ei:CallMethodAction MethodName="HideDialogWindowAndFocusParent"
+                                TargetObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

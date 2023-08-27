@@ -1,0 +1,134 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="assets/shutdown-b-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/shutdown-b-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/shutdown-w-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/shutdown-w-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/shutdown-5e5e5e-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/shutdown-5e5e5e-30.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/play.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/play.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/left.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/left.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/right.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/right.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/stop.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/stop.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/pause.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/pause.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/music-red-240.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/music-red-240.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/volume.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/volume.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/volume-mute.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/volume-mute.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/dots-horizontal_aaaaaa.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/dots-horizontal_aaaaaa.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/dots-horizontal.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/dots-horizontal.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/chevron-left.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/chevron-left.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/chevron-left_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/chevron-left_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/file.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/file.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/file_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/file_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/folder.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/folder.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/folder_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/folder_8c8c8c.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="assets/musical.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets/musical.png"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.2.0"/>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525"/>
+  </ItemGroup>
+</Project>

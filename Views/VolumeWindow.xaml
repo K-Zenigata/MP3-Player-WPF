@@ -1,0 +1,67 @@
+<Window x:Class="MP3Player_WPF.Views.VolumeWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:vm="clr-namespace:MP3Player_WPF.ViewModels"
+    Title="VolumeWindow"
+    Height="50"
+    Width="200"
+    WindowStyle="None"
+    AllowsTransparency="True"
+    Background="Transparent"
+    DataContext="{Binding Source={x:Static vm:MainWindowViewModel.Instance}}">
+    <!-- ↑ .xamlにシングルトンのViewModelを設定する場合 -->
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MusicPlayerButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/VolumeSliderStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Border Width="200"
+            Height="50"
+            Background="#232323"
+            CornerRadius="5,5,5,5">
+
+            <StackPanel Orientation="Horizontal">
+
+                <Button Style="{StaticResource MusicPlayerButtonStyle}"
+                    Width="20"
+                    Height="20"
+                    Margin="5,0,0,0"
+                    Name="VolumeBtn"
+                    Tag="{Binding VolumeImageUrl}"
+                    Command="{Binding VolumeImageCommand}"/>
+
+
+
+                <Slider x:Name="VolumeSlider"
+                    Style="{StaticResource CustomVolumeSliderStyle}"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    Foreground="{DynamicResource BaseColor}"
+                    Width="150"
+                    Minimum="0"
+                    Maximum="100"
+                    Value="{Binding VolumesValue, Mode=TwoWay}"
+                    IsMoveToPointEnabled="true">
+
+                    <!-- イベントをコマンドで扱いたい時のやり方 -->
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ValueChanged">
+                            <i:InvokeCommandAction Command="{Binding VolumeChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </Slider>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+
+</Window>
